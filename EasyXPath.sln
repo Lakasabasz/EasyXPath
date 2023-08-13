@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyXPath", "EasyXPath\EasyXPath.csproj", "{E485F4C2-CC8A-4AA9-A7AB-505253DBBD51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyXPath.Tests", "EasyXPath.Tests\EasyXPath.Tests.csproj", "{B869A342-D332-446E-A67B-89CC7367CADF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E485F4C2-CC8A-4AA9-A7AB-505253DBBD51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E485F4C2-CC8A-4AA9-A7AB-505253DBBD51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E485F4C2-CC8A-4AA9-A7AB-505253DBBD51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E485F4C2-CC8A-4AA9-A7AB-505253DBBD51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B869A342-D332-446E-A67B-89CC7367CADF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B869A342-D332-446E-A67B-89CC7367CADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B869A342-D332-446E-A67B-89CC7367CADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B869A342-D332-446E-A67B-89CC7367CADF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
