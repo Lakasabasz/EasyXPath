@@ -2,7 +2,25 @@
 
 public class XPath
 {
-    private string _current = "";
+    private bool Equals(XPath other)
+    {
+        return _current == other._current;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != this.GetType()) return false;
+        return Equals((XPath)obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return _current.GetHashCode();
+    }
+
+    private readonly string _current;
 
     public XPath(string xpath)
     {
