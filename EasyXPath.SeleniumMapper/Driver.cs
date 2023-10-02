@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 
 namespace EasyXPath.SeleniumMapper;
@@ -16,15 +15,9 @@ internal class Driver
         _driver.Url = url;
     }
 
-    public IWebElement GetElement(string xpath)
-    {
-        return _driver.FindElement(By.XPath(xpath));
-    }
+    public IWebElement GetElement(string xpath) => _driver.FindElement(By.XPath(xpath));
 
-    public IEnumerable<IWebElement> GetElements(string xpath)
-    {
-        return _driver.FindElements(By.XPath(xpath));
-    }
+    public IEnumerable<IWebElement> GetElements(string xpath) => _driver.FindElements(By.XPath(xpath));
 
     public void SetupEvent(IWebElement element, Guid id)
     {
@@ -50,44 +43,27 @@ internal class Driver
             window.selenium_ready = false;
             """, element);
     }
-
-    public void InitGlobalJsVariable(string name, string value)
-    {
-        ((IJavaScriptExecutor)_driver).ExecuteScript($"window.{name} = {value};");
-    }
-
-    public ReadOnlyCollection<object> WaitForClick()
-    {
-        while (true)
-        {
-            var x = ((IJavaScriptExecutor)_driver).ExecuteAsyncScript("""
-                                                                      var callback = arguments[0];
-                                                                      (function fn(){
-                                                                          if(window.selenium_clicked.lenght !== 0){
-                                                                              return callback(window.selenium_clicked);
-                                                                              }
-                                                                          setTimeout(fn, 60);
-                                                                      })();
-                                                                      """);
-            if (x is ReadOnlyCollection<object> { Count: > 0 } list) return list;
-        }
-    }
     
     public IWebElement WaitForKeyDown()
     {
         while (true)
         {
-            var x = ((IJavaScriptExecutor)_driver)
-                .ExecuteAsyncScript("""
-                                    var callback = arguments[0];
-                                    (function fn(){
-                                        if(window.selenium_ready){
-                                            return callback(window.selenium_target);
-                                        }
-                                        setTimeout(fn, 50);
-                                    })();
-                                    """);
-            return (IWebElement)x;
+            try
+            {
+                var x = ((IJavaScriptExecutor)_driver)
+                    .ExecuteAsyncScript("""
+                                        var callback = arguments[0];
+                                        (function fn(){
+                                            if(window.selenium_ready){
+                                                window.selenium_ready = false;
+                                                return callback(window.selenium_target);
+                                            }
+                                            setTimeout(fn, 50);
+                                        })();
+                                        """);
+                return (IWebElement)x;
+            }
+            catch (WebDriverTimeoutException){}
         }
     }
 
